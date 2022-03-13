@@ -13,7 +13,7 @@ class Cell extends Agent {
     // Publier paramètres 
 
     // Interaction
-    public boolean infection(){
+    public boolean initial_infection(){
         if (immune){
             System.out.println("La cellule est immune au virus ! ");
             return false;
@@ -25,5 +25,13 @@ class Cell extends Agent {
             infected = true;
             return true;
         }
+    }
+    public boolean ongoing_infection(){
+        infection_time += 1;
+        if (infection_time < infection_threshold){
+            death();
+            return true;
+        }
+        return true;
     }
 }
