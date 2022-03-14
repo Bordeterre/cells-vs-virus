@@ -17,7 +17,7 @@ abstract class Agent{
         x = pos_x;
         y = pos_y;
         this.icon = icon;
-    }
+    }   
 
     // Publier paramètres 
     public int[] position(){

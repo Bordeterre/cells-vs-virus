@@ -5,7 +5,6 @@ class Virus extends Agent {
     public Virus(int pos_x, int pos_y){
         super(pos_x, pos_y, " v ");
     }
-
     // Publier paramètres 
 
     // Interaction 
