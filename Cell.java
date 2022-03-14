@@ -10,14 +10,12 @@ class Cell extends Agent {
         this.infection_threshold = infection_threshold; 
     }
 
-    // Publier paramètres 
-
     // Interaction
     public boolean initial_infection(){
         if (immune){
-            System.out.println("La cellule est immune au virus ! ");
+            System.out.println("La cellule est immunisée au virus ! ");
             return false;
-        } else if (!infected) {
+        } else if (infected) {
             System.out.println("La cellule est déja infectée par un virus !");
             return false;
         } else {
