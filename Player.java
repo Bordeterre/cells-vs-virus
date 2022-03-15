@@ -3,7 +3,7 @@ import java.util.*;
 abstract class Player{
     private boolean human_player; //true pour human, false pour ordi
     private boolean cell_team; //true pour cells, false pour virus
-    private String agent_name;
+    private String agent_name; //Nom utilisé dans les messages pour les agents
     // Création
     public Player(boolean human_player, boolean cell_team){
         this.human_player = human_player;
@@ -21,8 +21,17 @@ abstract class Player{
     public String get_name(){
         return agent_name;
     }
+
     //Choisir un agent
-    public Agent select(Vector <Agent> Agents, int size){
+    public Agent select(Board board){
+        int size = board.getSize();
+        Vector <Agent> Agents;
+        if(cell_team){
+            Agents = board.Cells;
+        } else {
+            Agents = board.Virus;
+        }
+        
         int [] choice = select_choice(Agents, size);
 
         for(Iterator e = Agents.iterator(); e.hasNext();){
