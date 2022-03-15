@@ -22,9 +22,23 @@ abstract class Player{
         return agent_name;
     }
 
-    //Choisir un agent
+    //Turn
+    public void turn(Board board, int moves){
+        for(int i = 0; i<moves; i++){
+            Agent selected = null;
+            while (selected == null){
+                selected = select(board);
+            }
+            boolean legal_movement = false;
+            while (!legal_movement){
+                legal_movement=move(selected,board);
+            }
+            board.show();
+        }
+    }
+
+
     public Agent select(Board board){
-        int size = board.getSize();
         Vector <Agent> Agents;
         if(cell_team){
             Agents = board.Cells;
@@ -32,24 +46,48 @@ abstract class Player{
             Agents = board.Virus;
         }
         
-        int [] choice = select_choice(Agents, size);
+        int [] choice = select_choice(Agents);
 
         for(Iterator e = Agents.iterator(); e.hasNext();){
             Agent item = (Agent) e.next();
             if (Arrays.equals(item.position(),choice)){
-                System.out.println("Position ok !");
                 return item;
             }
         }
-        System.out.println("Position pas ok !");
+        System.out.println("Il n'y a pas de "+agent_name+" à cette position !");
         return null;
     }
 
-    public abstract int[] select_choice(Vector <Agent> Agents,int size); 
+    public abstract int[] select_choice(Vector <Agent> Agents); 
 
-    //déplacer un agent
 
-    public abstract void move(Agent selected);
+    public boolean move(Agent selected,Board board){
+        String direction = move_choice(selected);
+        selected.move(direction);
+        int[] pos = selected.position();
+        int size = board.getSize();
+        if (pos[0] <0){
+            selected.move("E");
+            System.out.println("Vous ne pouvez pas sortir du plateau !");
+            return false;
+        }
+        if (pos[1] <0){
+            selected.move("N");
+            System.out.println("Vous ne pouvez pas sortir du plateau !");
+            return false;
+        }
+        if (pos[0] >= size){
+            selected.move("W");
+            System.out.println("Vous ne pouvez pas sortir du plateau !");
+            return false;
+        }
+        if (pos[1] >= size){
+            selected.move("N");
+            System.out.println("Vous ne pouvez pas sortir du plateau !");
+            return false;
+        }
+        return true;
+    }
 
+    public abstract String move_choice(Agent selected);
 }
-

@@ -31,9 +31,9 @@ class Board{
         Cells = new Vector<Agent>();
         Virus = new Vector<Agent>();
 
-        //populate(Cells,Virus,board_size, "X_cell",10);
-        //populate(Cells,Virus,board_size, "Y_cell",10);
-        //populate(Cells,Virus,board_size, "Z_cell",10);
+        populate(Cells, "X_cell",1);
+        populate(Cells, "Y_cell",1);
+        populate(Cells, "Z_cell",1);
         populate(Virus,"Virus",1);
 
         show();
@@ -81,7 +81,7 @@ class Board{
             int x = item.position()[0];
             int y = item.position()[1];
             foreground[size*(size-y-1) +x] = item.display();
-            System.out.println("x : "+ Integer.toString(x) + ", y :" + Integer.toString(y));
+            //System.out.println("x : "+ Integer.toString(x) + ", y :" + Integer.toString(y));
         }
               
         for(Iterator e = Virus.iterator(); e.hasNext();){
@@ -89,7 +89,7 @@ class Board{
             int x = item.position()[0];
             int y = item.position()[1];
             foreground[size*(size-y-1) +x] = item.display();
-            System.out.println("x : "+ Integer.toString(x) + ", y : " + Integer.toString(y));
+            //System.out.println("x : "+ Integer.toString(x) + ", y : " + Integer.toString(y));
             }
 
 
