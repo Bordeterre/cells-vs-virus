@@ -34,7 +34,7 @@ class Board{
         populate(Cells, "X_cell",1);
         populate(Cells, "Y_cell",1);
         populate(Cells, "Z_cell",1);
-        populate(Virus,"Virus",1);
+        //populate(Virus,"Virus",10);
 
         show();
     }
@@ -133,5 +133,42 @@ class Board{
             line += "│";
         }
         System.out.println(line);
+    }
+
+    //Tour
+    public void cell_interacting(Agent A){
+        //Cells
+        Agent C = full_collision_check(A,Cells);
+        if (C != null){
+            fusion(A,C);
+        }
+
+        //Virus  
+        Agent V = full_collision_check(A,Virus);
+        if (V != null){
+            infection(V,A);
+        }
+    }
+
+    public void virus_interacting(Agent A){
+        Agent C = full_collision_check(A,Cells);
+        if (C != null){
+            infection(A,C);
+        }
+    }
+
+    public void fusion(Agent cell1, Agent cell2){
+        boolean immune = cell2.get_immune();
+        int infection_threshold = cell2.get_infection_threshold();
+        cell2.death();
+
+        cell1.fusion(immune, infection_threshold);
+
+    }
+
+    public void infection(Agent virus, Agent cell){
+        if (cell.initial_infection){
+            //??
+        }
     }
 }

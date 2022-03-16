@@ -46,4 +46,11 @@ abstract class Agent{
             default : {System.out.println("Direction invalide");}
         }
     }
+
+    //Specific to cells
+    abstract boolean get_immune();
+    abstract int get_infection_threshold();
+    abstract void fusion(boolean immune, int infection_threshold);
+    abstract boolean initial_infection();
+    abstract boolean ongoing_infection();
 }

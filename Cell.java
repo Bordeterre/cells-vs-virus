@@ -11,6 +11,18 @@ class Cell extends Agent {
     }
 
     // Interaction
+    public boolean get_immune(){
+        return immune;
+    }
+    public int get_infection_threshold(){
+        return infection_threshold;
+    }
+
+    public void fusion(boolean immune, int infection_threshold){
+        this.immune = this.immune && immune;
+        this.infection_threshold = Math.min(this.infection_threshold, infection_threshold);
+    }
+
     public boolean initial_infection(){
         if (immune){
             System.out.println("La cellule est immunisée au virus ! ");
@@ -24,6 +36,7 @@ class Cell extends Agent {
             return true;
         }
     }
+
     public boolean ongoing_infection(){
         infection_time += 1;
         if (infection_time < infection_threshold){

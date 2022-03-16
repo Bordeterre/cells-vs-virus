@@ -25,8 +25,8 @@ class Human_player extends Player{
         catch(IOException e){return 0;}
     }
     // Création
-    public Human_player(boolean cell_team){
-        super(true,cell_team);
+    public Human_player(boolean cells_team){
+        super(true,cells_team);
     }
     //Choisir un agent
 

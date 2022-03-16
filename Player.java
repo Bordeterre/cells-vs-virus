@@ -2,14 +2,14 @@ import java.io.*;
 import java.util.*;
 abstract class Player{
     private boolean human_player; //true pour human, false pour ordi
-    private boolean cell_team; //true pour cells, false pour virus
+    private boolean cells_team; //true pour cells, false pour virus
     private String agent_name; //Nom utilisé dans les messages pour les agents
     // Création
-    public Player(boolean human_player, boolean cell_team){
+    public Player(boolean human_player, boolean cells_team){
         this.human_player = human_player;
-        this.cell_team = cell_team;
+        this.cells_team = cells_team;
 
-        if (cell_team){
+        if (cells_team){
             agent_name = "cellule";
         } else {
             agent_name = "virus";
@@ -29,10 +29,18 @@ abstract class Player{
             while (selected == null){
                 selected = select(board);
             }
+            
             boolean legal_movement = false;
             while (!legal_movement){
                 legal_movement=move(selected,board);
             }
+
+            if(cells_team){
+                board.cell_interacting(selected);
+            } else {
+                board.virus_interacting(selected);
+            }
+            
             board.show();
         }
     }
@@ -40,7 +48,7 @@ abstract class Player{
 
     public Agent select(Board board){
         Vector <Agent> Agents;
-        if(cell_team){
+        if(cells_team){
             Agents = board.Cells;
         } else {
             Agents = board.Virus;
@@ -66,27 +74,27 @@ abstract class Player{
         selected.move(direction);
         int[] pos = selected.position();
         int size = board.getSize();
-        if (pos[0] <0){
-            selected.move("E");
+
+        Map<String,String> opposite = new HashMap<>();
+        opposite.put("W","E");
+        opposite.put("E","W");
+        opposite.put("N","S");
+        opposite.put("S","N");
+     
+        if (pos[0] <0 || pos[1] <0 || pos[0] >= size || pos[1] >= size){
+            selected.move(opposite.get(direction));
             System.out.println("Vous ne pouvez pas sortir du plateau !");
-            return false;
+            return false; 
         }
-        if (pos[1] <0){
-            selected.move("N");
-            System.out.println("Vous ne pouvez pas sortir du plateau !");
-            return false;
-        }
-        if (pos[0] >= size){
-            selected.move("W");
-            System.out.println("Vous ne pouvez pas sortir du plateau !");
-            return false;
-        }
-        if (pos[1] >= size){
-            selected.move("N");
-            System.out.println("Vous ne pouvez pas sortir du plateau !");
+
+        if(!cells_team && board.full_collision_check(selected,board.Virus) != null){
+            selected.move(opposite.get(direction));
+            System.out.println("Vous ne pouvez pas fusionner deux virus !");
             return false;
         }
         return true;
+
+
     }
 
     public abstract String move_choice(Agent selected);
