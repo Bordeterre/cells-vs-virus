@@ -24,6 +24,7 @@ class Board{
         }
         return null;
     }
+
     // Initialisation
     public Board(int size,int difficulty){
         this.size = size;
@@ -34,7 +35,7 @@ class Board{
         populate(Cells, "X_cell",1);
         populate(Cells, "Y_cell",1);
         populate(Cells, "Z_cell",1);
-        //populate(Virus,"Virus",10);
+        populate(Virus,"Virus",1);
 
         show();
     }
@@ -57,7 +58,7 @@ class Board{
                     item = new Cell(x,y,false,1, "Z");
                     break;
                 case "Virus" :
-                    item = new Virus(x,y); 
+                    item = new Virus(x,y,5); 
                     break;
             }
 
@@ -82,6 +83,7 @@ class Board{
             int y = item.position()[1];
             foreground[size*(size-y-1) +x] = item.display();
             //System.out.println("x : "+ Integer.toString(x) + ", y :" + Integer.toString(y));
+            item.debug();
         }
               
         for(Iterator e = Virus.iterator(); e.hasNext();){
@@ -89,7 +91,7 @@ class Board{
             int x = item.position()[0];
             int y = item.position()[1];
             foreground[size*(size-y-1) +x] = item.display();
-            //System.out.println("x : "+ Integer.toString(x) + ", y : " + Integer.toString(y));
+            item.debug();
             }
 
 
@@ -136,28 +138,28 @@ class Board{
     }
 
     //Tour
-    public void cell_interacting(Agent A){
+    public void cell_interacting(Cell A){
         //Cells
-        Agent C = full_collision_check(A,Cells);
+        Cell C = (Cell) full_collision_check(A,Cells);
         if (C != null){
             fusion(A,C);
         }
 
         //Virus  
-        Agent V = full_collision_check(A,Virus);
+        Virus V = (Virus) full_collision_check(A,Virus);
         if (V != null){
             infection(V,A);
         }
     }
 
-    public void virus_interacting(Agent A){
-        Agent C = full_collision_check(A,Cells);
+    public void virus_interacting(Virus A){
+        Cell C = (Cell) full_collision_check(A,Cells);
         if (C != null){
             infection(A,C);
         }
     }
 
-    public void fusion(Agent cell1, Agent cell2){
+    public void fusion(Cell cell1, Cell cell2){
         boolean immune = cell2.get_immune();
         int infection_threshold = cell2.get_infection_threshold();
         cell2.death();
@@ -166,9 +168,16 @@ class Board{
 
     }
 
-    public void infection(Agent virus, Agent cell){
-        if (cell.initial_infection()){
-            //??
+    public void infection(Virus virus, Cell cell){
+        if (cell.initial_infection(virus)){
+            virus.infect(cell);
+        }
+    }
+
+    public void turn(){
+        for(Iterator e = Virus.iterator(); e.hasNext();){
+            Virus item = (Virus) e.next();
+            item.update();
         }
     }
 }

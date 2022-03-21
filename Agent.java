@@ -28,6 +28,7 @@ abstract class Agent{
     public String display(){
         return icon;
     }
+    abstract void debug();
 
     // Destruction
     public void death (){

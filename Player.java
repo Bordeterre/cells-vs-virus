@@ -36,9 +36,9 @@ abstract class Player{
             }
 
             if(cells_team){
-                board.cell_interacting(selected);
+                board.cell_interacting( (Cell) selected);
             } else {
-                board.virus_interacting(selected);
+                board.virus_interacting( (Virus) selected);
             }
             
             board.show();

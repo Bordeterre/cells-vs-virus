@@ -3,12 +3,23 @@ class Cell extends Agent {
     private boolean infected = false;
     private int infection_time = 0;
     private int infection_threshold;
+    private Virus virus = null;
     // Création
     public Cell(int pos_x, int pos_y,boolean immune, int infection_threshold, String icon){
         super(pos_x, pos_y,"("+icon+")");
         this.immune = immune;
         this.infection_threshold = infection_threshold; 
     }
+
+    public void debug(){
+        int x = position()[0];
+        int y = position()[1];
+        String tmp = display();
+        tmp += "[ " + x + ", " + y + "] ; ";
+        tmp += "infection : " + infected + ", " + infection_time;
+        System.out.println(tmp);
+    }
+
 
     // Interaction
     public boolean get_immune(){
@@ -23,7 +34,7 @@ class Cell extends Agent {
         this.infection_threshold = Math.min(this.infection_threshold, infection_threshold);
     }
 
-    public boolean initial_infection(){
+    public boolean initial_infection(Virus virus){
         if (immune){
             System.out.println("La cellule est immunisée au virus ! ");
             return false;
@@ -33,6 +44,7 @@ class Cell extends Agent {
         } else {
             System.out.println("Infection réussie !");
             infected = true;
+            this.virus = virus;
             return true;
         }
     }
@@ -43,6 +55,6 @@ class Cell extends Agent {
             death();
             return true;
         }
-        return true;
+        return false;
     }
 }
