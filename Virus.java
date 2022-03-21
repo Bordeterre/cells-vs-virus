@@ -13,6 +13,9 @@ class Virus extends Agent {
         String tmp = display();
         tmp += "[ " + x + ", " + y + "] ; ";
         tmp += "turns :" + turns;
+        if (host_cell != null){
+            tmp += " "+host_cell.display();
+        }
         System.out.println(tmp);
 
         
@@ -21,7 +24,7 @@ class Virus extends Agent {
     public void infect(Cell host_cell){
         this.host_cell = host_cell;
     }
-    
+
     public int[] update(){
         if(host_cell == null){
             turns -=1;

@@ -18,7 +18,7 @@ public class Main{
         Player cells_player = new Human_player(true);
         Player virus_player = new Human_player(false);
 
-        for (int i = 0 ; i<3; i++){
+        while(true){
             turn(board,virus_player,cells_player);
         }
     }

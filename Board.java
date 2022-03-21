@@ -81,7 +81,9 @@ class Board{
             Agent item = (Agent) e.next();
             int x = item.position()[0];
             int y = item.position()[1];
-            foreground[size*(size-y-1) +x] = item.display();
+            if (x != -1){
+                foreground[size*(size-y-1) +x] = item.display();
+            }
             //System.out.println("x : "+ Integer.toString(x) + ", y :" + Integer.toString(y));
             item.debug();
         }
@@ -90,7 +92,9 @@ class Board{
             Agent item = (Agent) e.next();
             int x = item.position()[0];
             int y = item.position()[1];
-            foreground[size*(size-y-1) +x] = item.display();
+            if (x != -1){
+                foreground[size*(size-y-1) +x] = item.display();
+            }
             item.debug();
             }
 

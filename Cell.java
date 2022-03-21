@@ -17,9 +17,11 @@ class Cell extends Agent {
         String tmp = display();
         tmp += "[ " + x + ", " + y + "] ; ";
         tmp += "infection : " + infected + ", " + infection_time;
+        if (virus != null){
+            tmp += " " + virus.display();
+        }
         System.out.println(tmp);
     }
-
 
     // Interaction
     public boolean get_immune(){
@@ -51,7 +53,9 @@ class Cell extends Agent {
 
     public boolean ongoing_infection(){
         infection_time += 1;
-        if (infection_time < infection_threshold){
+        System.out.println(infection_time);
+        System.out.println(infection_threshold);
+        if (infection_time >= infection_threshold){
             death();
             return true;
         }
