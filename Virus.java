@@ -1,4 +1,3 @@
-
 class Virus extends Agent {
 
     // Création

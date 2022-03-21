@@ -167,7 +167,7 @@ class Board{
     }
 
     public void infection(Agent virus, Agent cell){
-        if (cell.initial_infection){
+        if (cell.initial_infection()){
             //??
         }
     }
