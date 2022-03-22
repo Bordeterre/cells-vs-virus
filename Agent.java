@@ -10,14 +10,18 @@ abstract class Agent{
     private int y;
     private String icon;
     
-    // Création
+    // Création / modification
     public Agent (int pos_x, int pos_y, String icon){
         id = nb_agents;
         nb_agents += 1;
         x = pos_x;
         y = pos_y;
         this.icon = icon;
-    }   
+    }  
+
+    public void setIcon(String new_icon){
+        icon = new_icon;
+    }  
 
     // Publier paramètres 
     public int[] position(){
@@ -28,6 +32,7 @@ abstract class Agent{
     public String display(){
         return icon;
     }
+
     abstract void debug();
 
     // Destruction

@@ -6,7 +6,7 @@ class Virus extends Agent {
         super(pos_x, pos_y, " v ");
         this.turns = turns;
     }
-    // Publier paramètres 
+    // Publier paramètres
     public void debug(){
         int x = position()[0];
         int y = position()[1];
@@ -23,6 +23,7 @@ class Virus extends Agent {
     // Interaction 
     public void infect(Cell host_cell){
         this.host_cell = host_cell;
+        setIcon("[" + host_cell.display().charAt(1) + "]");
     }
 
     public int[] update(){

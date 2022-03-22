@@ -11,6 +11,7 @@ class Cell extends Agent {
         this.infection_threshold = infection_threshold; 
     }
 
+    // Publier paramètres
     public void debug(){
         int x = position()[0];
         int y = position()[1];
