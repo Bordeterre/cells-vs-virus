@@ -32,17 +32,20 @@ class Cell extends Agent {
         return infection_threshold;
     }
 
-    public void fusion(boolean immune, int infection_threshold){
-        this.immune = this.immune && immune;
-        this.infection_threshold = Math.min(this.infection_threshold, infection_threshold);
+    public void fusion(boolean immune, int infection_threshold, String icon){
+        //this.immune = this.immune && immune;
+        //this.infection_threshold = Math.min(this.infection_threshold, infection_threshold);
+
     }
 
     public boolean initial_infection(Virus virus){
         if (immune){
             System.out.println("La cellule est immunisée au virus ! ");
+            virus.death();
             return false;
         } else if (infected) {
             System.out.println("La cellule est déja infectée par un virus !");
+            virus.death();
             return false;
         } else {
             System.out.println("Infection réussie !");

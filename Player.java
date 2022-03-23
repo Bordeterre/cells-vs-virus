@@ -88,13 +88,18 @@ abstract class Player{
      
         if (pos[0] <0 || pos[1] <0 || pos[0] >= size || pos[1] >= size){
             selected.move(opposite.get(direction));
-            System.out.println("Vous ne pouvez pas sortir du plateau !");
+            if (human_player){
+                System.out.println("Vous ne pouvez pas sortir du plateau !");
+            }
+            
             return false; 
         }
 
         if(!cells_team && board.full_collision_check(selected,board.Virus) != null){
             selected.move(opposite.get(direction));
-            System.out.println("Vous ne pouvez pas fusionner deux virus !");
+            if (human_player){
+                System.out.println("Vous ne pouvez pas fusionner deux virus !");
+            }
             return false;
         }
         return true;

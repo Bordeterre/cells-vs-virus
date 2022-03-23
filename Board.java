@@ -164,12 +164,16 @@ class Board{
     }
 
     public void fusion(Cell cell1, Cell cell2){
-        boolean immune = cell2.get_immune();
-        int infection_threshold = cell2.get_infection_threshold();
-        cell2.death();
 
-        cell1.fusion(immune, infection_threshold);
-
+        if(cell1.get_immune()){
+            cell1.death();
+        } else if (cell2.get_immune()){
+            cell2.death();
+        } else if(cell1.get_infection_threshold() < cell2.get_infection_threshold()){
+            cell2.death();
+        } else {
+            cell1.death();
+        }
     }
 
     public void infection(Virus virus, Cell cell){
