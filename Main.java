@@ -16,7 +16,7 @@ public class Main{
     public static void main(String[] args){
         Board board = new Board(3,1);
         Player cells_player = new Human_player(true);
-        Player virus_player = new Human_player(false);
+        Player virus_player = new Robot_player(false);
 
         while(true){
             turn(board,virus_player,cells_player);

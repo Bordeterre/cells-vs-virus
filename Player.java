@@ -76,10 +76,10 @@ abstract class Player{
         int size = board.getSize();
 
         Map<String,String> opposite = new HashMap<>();
-        opposite.put("W","E");
-        opposite.put("E","W");
-        opposite.put("N","S");
-        opposite.put("S","N");
+        opposite.put("z","s");
+        opposite.put("s","z");
+        opposite.put("q","d");
+        opposite.put("d","q");
 
         if (!legal){
             System.out.println("Veuillez entrer une direction valide ! (z/q/s/d)");
