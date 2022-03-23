@@ -40,6 +40,7 @@ class Virus extends Agent {
                 host_cell = null;
             }
             if (turns >= 10){
+                System.out.println("updated");
                 turns = 4;
                 return position();
             }

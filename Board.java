@@ -189,16 +189,20 @@ class Board{
 
     
     public void turn(){
+        Agent item2 = null;
         for(Iterator e = Virus.iterator(); e.hasNext();){
             Virus item = (Virus) e.next();
             int [] position = item.update();
             if (position[0] != -1){
-                int x = position[0]+1;
+                int x = position[0];
                 int y = position[1];
-                Agent item2 = new Virus(x,y,5);
-                Virus.add(item2);
+                item2 = new Virus(x,y,5);
+
+                
             }
         }
+        Virus.add(item2);
+        System.out.println("E");
         show();
     }
 }
