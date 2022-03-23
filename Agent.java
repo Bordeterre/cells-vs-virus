@@ -43,13 +43,14 @@ abstract class Agent{
     }
 
     // Déplacement 
-    public void move(String movement){
+    public boolean move(String movement){
         switch (movement){
-            case "N" : { y += 1;break;}
-            case "S" : { y -= 1;break;}
-            case "E" : { x += 1;break;}
-            case "W" : { x -= 1;break;}
-            default : {System.out.println("Direction invalide");}
+            case "z" : { y += 1;break;}
+            case "s" : { y -= 1;break;}
+            case "d" : { x += 1;break;}
+            case "q" : { x -= 1;break;}
+            default : {return false;}
         }
+        return true;
     }
 }

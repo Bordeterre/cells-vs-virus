@@ -71,7 +71,7 @@ abstract class Player{
 
     public boolean move(Agent selected,Board board){
         String direction = move_choice(selected);
-        selected.move(direction);
+        boolean legal = selected.move(direction);
         int[] pos = selected.position();
         int size = board.getSize();
 
@@ -80,6 +80,11 @@ abstract class Player{
         opposite.put("E","W");
         opposite.put("N","S");
         opposite.put("S","N");
+
+        if (!legal){
+            System.out.println("Veuillez entrer une direction valide ! (z/q/s/d)");
+            return false;
+        }
      
         if (pos[0] <0 || pos[1] <0 || pos[0] >= size || pos[1] >= size){
             selected.move(opposite.get(direction));

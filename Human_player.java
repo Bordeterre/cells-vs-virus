@@ -39,7 +39,7 @@ class Human_player extends Player{
     }
 
     public String move_choice(Agent selected){
-        System.out.print("Veuillez entrer la direction du déplacement (N/S/E/W) : ");
+        System.out.print("Veuillez entrer la direction du déplacement (z/q/s/d) : ");
         String direction = saisie_chaine();
         return direction;
     };

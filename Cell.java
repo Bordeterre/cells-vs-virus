@@ -54,8 +54,6 @@ class Cell extends Agent {
 
     public boolean ongoing_infection(){
         infection_time += 1;
-        System.out.println(infection_time);
-        System.out.println(infection_threshold);
         if (infection_time >= infection_threshold){
             death();
             return true;
