@@ -1,9 +1,11 @@
 class Virus extends Agent {
     private Cell host_cell = null;
     private int turns;
+    private String original_icon;
     // Création
     public Virus(int pos_x, int pos_y, int turns){
         super(pos_x, pos_y, " v ");
+        original_icon = " v ";
         this.turns = turns;
     }
     // Publier paramètres
@@ -48,9 +50,10 @@ class Virus extends Agent {
 
     public boolean move(String movement){
         boolean legal_move = true_move(movement);
-        //if (legal_move && host_cell != null){
-            ///
-        //}
+        if (legal_move && host_cell != null){
+            host_cell.cure();
+            setIcon(original_icon);
+        }
         return legal_move;
     }
 

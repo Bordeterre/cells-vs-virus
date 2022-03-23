@@ -69,4 +69,10 @@ class Cell extends Agent {
         }
         return legal_move;
     }
+
+    public void cure(){
+        infection_time = 0;
+        virus = null;
+        infected = false;
+    }
 }
