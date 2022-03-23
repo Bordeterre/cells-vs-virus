@@ -29,59 +29,52 @@ public class Main{
     }
     
     //Initialisation
-    public static Player virus_player_choice(){
-        String player_virus = "N";
-        Player virus_player  = new Robot_player(false);
-        //while (player_virus != "H" && player_virus != "R"){
-            System.out.println("Player One ! Virus ! Si les virus sont joués par un humain tapez 'H', pour qu'ils soient joués par un robot tapez 'R'");
-            player_virus = saisie_chaine();
-            switch(player_virus){
-                case "H" : virus_player = new Human_player(false);
-                        break;
-                case "R" : virus_player = new Robot_player(false);
-                        break;
-                default : System.out.println ("Vous n'avez pas entré de joueur possible.");
+    public static Player player_choice(Boolean cell_team){
+        String choice = "";
+        while(true){
+            choice = saisie_chaine();
+            switch(choice){
+                case "h" : return new Human_player(cell_team);
+                case "r" : return new Robot_player(cell_team);
+                default : System.out.println ("Tapez h pour un joueur humain, ou r pour un joueur robot");
             }
-        //}
-        return virus_player;
+        }
     }
 
     //Game turn
-    public static void turn(Board board, Player virus_player,Player cells_player){
+    public static boolean turn(Board board, Player virus_player,Player cells_player){
+        if(board.check_victory()){
+            return false;
+        }
+        System.out.println("Virus turn");
         virus_player.turn(board,1);
+
+        if(board.check_victory()){
+            return false;
+        }
+        System.out.println("Cell turn");
         cells_player.turn(board,1);
+
+        if(board.check_victory()){
+            return false;
+        }
+        System.out.println("Board turn");
         board.turn(virus_player);
+        return true;
     }
-
-    
-
-
-    public static Player cells_player_choice(){
-        String player_cells = "N";
-        Player cells_player = new Robot_player(true);
-        //while (player_cells != "H" && player_cells != "R"){
-            System.out.println("Player Two ! Cells ! Si les cellules sont joués par un humain tapez 'H', pour qu'elles soient joués par un robot tapez 'R'");
-            player_cells = saisie_chaine();
-            switch(player_cells){
-                case "H" : cells_player = new Human_player(true);
-                        break;
-                case "R" : cells_player = new Robot_player(true);
-                        break;
-                default : System.out.println ("Vous n'avez pas entré de joueur possible.");
-            }
-        //}
-        return cells_player;
-    }
-
 
     //Main
     public static void main(String[] args){
         Board board = new Board(3,1);
-        Player virus_player = virus_player_choice();
-        Player cells_player = cells_player_choice();
+        System.out.println("Player one, Virus ! Tapez h pour un joueur humain, ou r pour un joueur robot");
+        Player virus_player = player_choice(false);
+        System.out.println("Player two, Cells ! Tapez h pour un joueur humain, ou r pour un joueur robot");
+        Player cells_player = player_choice(true);
 
-        while(true){
-            turn(board,virus_player,cells_player);
+        boolean playing = true;
+        while(playing){
+            playing = turn(board,virus_player,cells_player);
         }
+        board.turn(virus_player);
     }
 }

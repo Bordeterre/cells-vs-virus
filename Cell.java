@@ -11,6 +11,11 @@ class Cell extends Agent {
         this.infection_threshold = infection_threshold; 
     }
 
+    public void death (){
+        cure();
+        true_death();
+    }
+
     // Publier paramètres
     public void debug(){
         int x = position()[0];
@@ -31,6 +36,7 @@ class Cell extends Agent {
     public boolean get_immune(){
         return immune;
     }
+
     public int get_infection_threshold(){
         return infection_threshold;
     }
@@ -55,7 +61,6 @@ class Cell extends Agent {
     public boolean ongoing_infection(){
         infection_time += 1;
         if (infection_time >= infection_threshold){
-            cure();
             death();
             return true;
         }
@@ -72,8 +77,12 @@ class Cell extends Agent {
     }
 
     public void cure(){
-        infection_time = 0;
-        virus = null;
-        infected = false;
+        if(virus != null){
+            virus.exit();
+            infection_time = 0;
+            virus = null;
+            infected = false;
+        }
+
     }
 }

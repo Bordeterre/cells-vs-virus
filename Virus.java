@@ -8,6 +8,14 @@ class Virus extends Agent {
         original_icon = " v ";
         this.turns = turns;
     }
+
+    public void death (){
+        if(host_cell != null){
+            host_cell.cure();
+        }
+        true_death();
+    }
+
     // Publier paramètres
     public void debug(){
         int x = position()[0];
@@ -21,6 +29,10 @@ class Virus extends Agent {
         System.out.println(tmp);
 
         
+    }
+
+    public int get_turns(){
+        return turns;
     }
     // Interaction 
     public void infect(Cell host_cell){
@@ -52,10 +64,13 @@ class Virus extends Agent {
         boolean legal_move = true_move(movement);
         if (legal_move && host_cell != null){
             host_cell.cure();
-            setIcon(original_icon);
         }
         return legal_move;
     }
 
+    public void exit(){
+        host_cell = null;
+        setIcon(original_icon);
+    }
 
 }

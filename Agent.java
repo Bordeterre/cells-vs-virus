@@ -45,7 +45,8 @@ abstract class Agent{
     abstract void debug();
 
     // Destruction
-    public void death (){
+    abstract void death();
+    public void true_death(){
         x = -1;
         y = -1;
         this.alive = false;

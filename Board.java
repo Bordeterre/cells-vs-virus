@@ -93,6 +93,7 @@ class Board{
             Agent item = (Agent) e.next();
             int x = item.position()[0];
             int y = item.position()[1];
+            //if (x != -1 && size*(size-y-1) + x >= 0 && size*(size-y-1) +x < foreground.length){
             if (x != -1){
                 foreground[size*(size-y-1) +x] = item.display();
             }
@@ -168,6 +169,12 @@ class Board{
         if (C != null){
             infection(A,C);
         }
+        //Virus  
+        Virus V = (Virus) full_collision_check(A,Virus);
+        if (V != null){
+            fight(A,V);
+            
+        }
     }
 
     public void fusion(Cell cell1, Cell cell2){
@@ -177,13 +184,23 @@ class Board{
         } else if (cell2.get_immune()){
             cell2.death();
         } else if(cell1.get_infection_threshold() < cell2.get_infection_threshold()){
-            cell1.cure();
+            cell2.cure();
             cell2.death();
         } else {
-            cell2.cure();
+            cell1.cure();
             cell1.death();
         }
     }
+
+    public void fight(Virus virus1, Virus virus2){
+        if(virus1.get_turns()>virus2.get_turns()){
+            virus2.death();
+        } else {
+            virus1.death();
+        }
+    }
+
+
 
     public void infection(Virus virus, Cell cell){
         if (cell.initial_infection(virus)){
@@ -215,5 +232,17 @@ class Board{
         Cells.removeIf(e-> !e.isAlive());
 
         show();
+    }
+
+    public boolean check_victory(){
+        if(Virus.size() == 0){
+            System.out.println("Tous les virus ont étés exterminés ! Player two wins !");
+            return true;
+        }
+        if(Cells.size() == 0){
+            System.out.println("Toutes les cellules ont étés exterminés ! Player one wins !");
+            return true;
+        }
+        return false;
     }
 }
