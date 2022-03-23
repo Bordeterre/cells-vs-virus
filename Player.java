@@ -26,21 +26,22 @@ abstract class Player{
     public void turn(Board board, int moves){
         for(int i = 0; i<moves; i++){
             Agent selected = null;
-            while (selected == null){
+            boolean legal_movement = false;
+            while (selected == null && !legal_movement){
+                System.out.println("Must select !");
                 selected = select(board);
+                
+                if(selected != null){
+                    System.out.println("Must move !");
+                    legal_movement=move(selected,board);
+                }
             }
             
-            boolean legal_movement = false;
-            while (!legal_movement){
-                legal_movement=move(selected,board);
-            }
-
             if(cells_team){
                 board.cell_interacting( (Cell) selected);
             } else {
                 board.virus_interacting( (Virus) selected);
             }
-            
             board.show();
         }
     }
@@ -70,6 +71,7 @@ abstract class Player{
 
 
     public boolean move(Agent selected,Board board){
+        //board.show();
         String direction = move_choice(selected);
         boolean legal = selected.move(direction);
         int[] pos = selected.position();
@@ -80,7 +82,7 @@ abstract class Player{
         opposite.put("s","z");
         opposite.put("q","d");
         opposite.put("d","q");
-
+        
         if (!legal){
             System.out.println("Veuillez entrer une direction valide ! (z/q/s/d)");
             return false;

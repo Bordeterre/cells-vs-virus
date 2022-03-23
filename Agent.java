@@ -33,6 +33,10 @@ abstract class Agent{
         return icon;
     }
 
+    public boolean isAlive(){
+        return alive;
+    }
+    
     abstract void debug();
 
     // Destruction

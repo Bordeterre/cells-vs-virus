@@ -10,11 +10,18 @@ class Robot_player extends Player{
 //Choisir un agent
 
 public int[] select_choice(Vector <Agent> Agents){
-    int max = Agents.size();
-    Random ran = new Random();
-    int nb = ran.nextInt(max);
-    Agent selected = Agents.get(nb);
-    return selected.position();
+    boolean alive = false;
+    int[] pos = {-1,-1};
+    while(!alive){
+        int max = Agents.size();
+        Random ran = new Random();
+        int nb = ran.nextInt(max);
+        Agent selected = Agents.get(nb);
+        alive = selected.isAlive();
+        pos = selected.position();
+    }
+    
+    return pos ;
 }
 
 public String move_choice(Agent selected){

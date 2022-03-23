@@ -35,7 +35,7 @@ class Board{
         populate(Cells, "X_cell",1);
         populate(Cells, "Y_cell",1);
         populate(Cells, "Z_cell",1);
-        populate(Virus,"Virus",1);
+        populate(Virus,"Virus",3);
 
         show();
     }
@@ -187,5 +187,6 @@ class Board{
             Virus item = (Virus) e.next();
             item.update();
         }
+        show();
     }
 }
