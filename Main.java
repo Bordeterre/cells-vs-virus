@@ -28,16 +28,7 @@ public class Main{
         catch(IOException e){return 0;}
     }
     
-    
-    //Game turn
-    public static void turn(Board board, Player virus_player,Player cells_player){
-        virus_player.turn(board,1);
-        cells_player.turn(board,1);
-        board.turn();
-        board.show();
-        
-    }
-
+    //Initialisation
     public static Player virus_player_choice(){
         String player_virus = "N";
         Player virus_player  = new Robot_player(false);
@@ -54,6 +45,15 @@ public class Main{
         //}
         return virus_player;
     }
+
+    //Game turn
+    public static void turn(Board board, Player virus_player,Player cells_player){
+        virus_player.turn(board,1);
+        cells_player.turn(board,1);
+        board.turn(virus_player);
+    }
+
+    
 
 
     public static Player cells_player_choice(){

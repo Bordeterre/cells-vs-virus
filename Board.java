@@ -82,6 +82,7 @@ class Board{
             int x = item.position()[0];
             int y = item.position()[1];
             if (x != -1){
+                //System.out.println(" " + x + " " + y + " " + size*(size-y-1) +x);
                 foreground[size*(size-y-1) +x] = item.display();
             }
             //System.out.println("x : "+ Integer.toString(x) + ", y :" + Integer.toString(y));
@@ -142,6 +143,7 @@ class Board{
     }
 
     //Tour
+
     public void cell_interacting(Cell A){
         //Cells
         Cell C = (Cell) full_collision_check(A,Cells);
@@ -175,8 +177,10 @@ class Board{
         } else if (cell2.get_immune()){
             cell2.death();
         } else if(cell1.get_infection_threshold() < cell2.get_infection_threshold()){
+            cell1.cure();
             cell2.death();
         } else {
+            cell2.cure();
             cell1.death();
         }
     }
@@ -187,8 +191,7 @@ class Board{
         }
     }
 
-    
-    public void turn(){
+    public void turn(Player virus_player){
         Agent item2 = null;
         for(Iterator e = Virus.iterator(); e.hasNext();){
             Virus item = (Virus) e.next();
@@ -197,12 +200,20 @@ class Board{
                 int x = position[0];
                 int y = position[1];
                 item2 = new Virus(x,y,5);
-
-                
+                boolean legal_movement = false;
+                System.out.println("Votre virus s'est cloné ! Vers quelle direction voulez vous déplacer le nouveau né ?");
+                while (!legal_movement){
+                    legal_movement = virus_player.move(item2,this);
+                }
+                Virus.add(item2);
+                break;
             }
         }
-        Virus.add(item2);
-        System.out.println("E");
+
+        //Removes dead cells and virus from vector
+        Virus.removeIf(e-> !e.isAlive());
+        Cells.removeIf(e-> !e.isAlive());
+
         show();
     }
 }

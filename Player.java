@@ -27,7 +27,7 @@ abstract class Player{
         for(int i = 0; i<moves; i++){
             Agent selected = null;
             boolean legal_movement = false;
-            while (selected == null && !legal_movement){
+            while (selected == null || !legal_movement){
                 selected = select(board);
                 if(selected != null){
                     legal_movement=move(selected,board);
@@ -53,11 +53,12 @@ abstract class Player{
         }
         
         int [] choice = select_choice(Agents);
-
-        for(Iterator e = Agents.iterator(); e.hasNext();){
-            Agent item = (Agent) e.next();
-            if (Arrays.equals(item.position(),choice)){
-                return item;
+        if (choice[0] != -1){ //Prevent from selecting dead agents
+            for(Iterator e = Agents.iterator(); e.hasNext();){
+                Agent item = (Agent) e.next();
+                if (Arrays.equals(item.position(),choice)){
+                    return item;
+                }
             }
         }
         System.out.println("Il n'y a pas de "+agent_name+" à cette position !");
@@ -102,8 +103,6 @@ abstract class Player{
             return false;
         }
         return true;
-
-
     }
 
     public abstract String move_choice(Agent selected);
