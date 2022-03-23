@@ -3,7 +3,7 @@ import java.util.*;
 import java.lang.*;
 
 public class Main{
-        // Utilitaires
+    // Utilitaires
     public static String saisie_chaine (){
         try {
             BufferedReader buff = new BufferedReader
@@ -16,6 +16,7 @@ public class Main{
             return null;
         }
     }
+
     public static int saisie_entier (){
         try{
             BufferedReader buff = new BufferedReader

@@ -24,6 +24,9 @@ class Cell extends Agent {
         System.out.println(tmp);
     }
 
+    public Virus getVirus(){
+        return virus;
+    }
     // Interaction
     public boolean get_immune(){
         return immune;
@@ -58,5 +61,12 @@ class Cell extends Agent {
         return false;
     }
 
-
+    public boolean move(String movement){
+        boolean legal_move = true_move(movement);
+        if (legal_move && virus != null){
+            infected = false;
+            virus.move(movement);
+        }
+        return legal_move;
+    }
 }

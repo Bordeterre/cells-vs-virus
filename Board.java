@@ -152,7 +152,12 @@ class Board{
         //Virus  
         Virus V = (Virus) full_collision_check(A,Virus);
         if (V != null){
-            infection(V,A);
+            if(A.getVirus() == null){
+                infection(V,A);
+            } else {
+                V.death();
+            }
+            
         }
     }
 

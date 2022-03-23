@@ -28,11 +28,8 @@ abstract class Player{
             Agent selected = null;
             boolean legal_movement = false;
             while (selected == null && !legal_movement){
-                System.out.println("Must select !");
                 selected = select(board);
-                
                 if(selected != null){
-                    System.out.println("Must move !");
                     legal_movement=move(selected,board);
                 }
             }

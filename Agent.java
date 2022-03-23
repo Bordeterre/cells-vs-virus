@@ -21,7 +21,12 @@ abstract class Agent{
 
     public void setIcon(String new_icon){
         icon = new_icon;
-    }  
+    }
+
+    public void setPosition(int[] pos){
+        x = pos[0];
+        y = pos[1];
+    } 
 
     // Publier paramètres 
     public int[] position(){
@@ -36,7 +41,7 @@ abstract class Agent{
     public boolean isAlive(){
         return alive;
     }
-    
+
     abstract void debug();
 
     // Destruction
@@ -47,7 +52,8 @@ abstract class Agent{
     }
 
     // Déplacement 
-    public boolean move(String movement){
+    abstract boolean move (String movement);
+    public boolean true_move(String movement){
         switch (movement){
             case "z" : { y += 1;break;}
             case "s" : { y -= 1;break;}

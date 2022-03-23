@@ -45,4 +45,14 @@ class Virus extends Agent {
         int[] nosplit = {-1,-1};
         return nosplit;
     }
+
+    public boolean move(String movement){
+        boolean legal_move = true_move(movement);
+        //if (legal_move && host_cell != null){
+            ///
+        //}
+        return legal_move;
+    }
+
+
 }
