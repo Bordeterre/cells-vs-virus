@@ -18,7 +18,7 @@ abstract class Agent{
         y = pos_y;
         this.icon = icon;
     }  
-    // Changer l'icone de l'Agent lorsqu'il est infecté ou guéri
+    // Change l'icone de l'Agent lorsqu'il est infecté ou guéri
     public void setIcon(String new_icon){
         icon = new_icon;
     }
