@@ -54,8 +54,13 @@ public class Main{
     }
 
     public static int size_choice(){
-        System.out.println("Quelle taille de plateau voulez vous utiliser (5 recommendé pour une partie pas trop longue)");
+        System.out.print("Quelle taille de plateau voulez vous utiliser (5 recommendé pour une partie pas trop longue)");
         int choice = saisie_entier();
+        while(choice <3){
+            System.out.print("Plateau trop petit ! Veuillez choisir une valeur superieure à 2 : ")
+            choice = saisie_entier();
+
+        }
         return choice;
     
     }
