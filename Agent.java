@@ -10,7 +10,7 @@ abstract class Agent{
     private int y;
     private String icon;
     
-    // Création / modification
+    // Création de l'agent et sa modification lorsqu'il bouge
     public Agent (int pos_x, int pos_y, String icon){
         id = nb_agents;
         nb_agents += 1;
@@ -18,7 +18,7 @@ abstract class Agent{
         y = pos_y;
         this.icon = icon;
     }  
-
+    // Changer l'icone de l'Agent lorsqu'il est infecté ou guéri
     public void setIcon(String new_icon){
         icon = new_icon;
     }
@@ -44,7 +44,7 @@ abstract class Agent{
 
     abstract void debug();
 
-    // Destruction
+    // Destruction : change les coordonnées de l'Agent pour le déplacer en dehors du plateau
     abstract void death();
     public void true_death(){
         x = -1;
