@@ -159,7 +159,6 @@ class Board{
             } else if (A.getVirus() != V){
                 V.death();
             }
-            
         }
     }
 
@@ -224,23 +223,19 @@ class Board{
                 break;
             }
         }
-
-        //Removes dead cells and virus from vector
-        Virus.removeIf(e-> !e.isAlive());
-        Cells.removeIf(e-> !e.isAlive());
-
         show();
     }
 
-    public boolean check_victory(){
+    public void check_victory(){
+        Virus.removeIf(e-> !e.isAlive());
+        Cells.removeIf(e-> !e.isAlive());
         if(Virus.size() == 0){
             System.out.println("Tous les virus ont étés exterminés ! Player two wins !");
-            return true;
+            System.exit(0);
         }
         if(Cells.size() == 0){
             System.out.println("Toutes les cellules ont étés exterminés ! Player one wins !");
-            return true;
+            System.exit(0);
         }
-        return false;
     }
 }

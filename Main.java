@@ -54,7 +54,7 @@ public class Main{
     }
 
     public static int size_choice(){
-        System.out.print("Quelle taille de plateau voulez vous utiliser (5 recommendé pour une partie pas trop longue)");
+        System.out.println("Quelle taille de plateau voulez vous utiliser (5 recommendé pour une partie pas trop longue)");
         int choice = saisie_entier();
         while(choice <3){
             System.out.print("Plateau trop petit ! Veuillez choisir une valeur superieure à 2 : ");
@@ -80,25 +80,15 @@ public class Main{
     }
 
     //Game turn
-    public static boolean turn(Board board, Player virus_player,Player cells_player){
-        if(board.check_victory()){
-            return false;
-        }
+    public static void turn(Board board, Player virus_player,Player cells_player){
         System.out.println("Virus turn");
         virus_player.turn(board,4);
 
-        if(board.check_victory()){
-            return false;
-        }
         System.out.println("Cell turn");
         cells_player.turn(board,1);
 
-        if(board.check_victory()){
-            return false;
-        }
         System.out.println("Board turn");
         board.turn(virus_player);
-        return true;
     }
 
     //Main
@@ -112,9 +102,8 @@ public class Main{
         Player cells_player = player_choice(true);
 
         board.show();
-        boolean playing = true;
-        while(playing){
-            playing = turn(board,virus_player,cells_player);
+        while(true){
+            turn(board,virus_player,cells_player);
         }
     }
 }

@@ -21,7 +21,7 @@ class Cell extends Agent {
         int x = position()[0];
         int y = position()[1];
         String tmp = display();
-        tmp += "[ " + x + ", " + y + "] ; ";
+        tmp += "[ " + (x+1) + ", " + (y+1) + "] ; ";
         tmp += "infection : " + infected + ", " + infection_time;
         if (virus != null){
             tmp += " " + virus.display();

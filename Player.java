@@ -26,6 +26,7 @@ abstract class Player{
     //Turn
     public void turn(Board board, int moves){
         for(int i = 0; i<moves; i++){
+            board.check_victory();
             Agent selected = null;
             boolean legal_movement = false;
             while (selected == null || !legal_movement){
@@ -43,7 +44,6 @@ abstract class Player{
             board.show();
         }
     }
-
 
     public Agent select(Board board){
         Vector <Agent> Agents;
@@ -70,7 +70,6 @@ abstract class Player{
 
 
     public boolean move(Agent selected,Board board){
-        //board.show();
         String direction = move_choice(selected);
         boolean legal = selected.move(direction);
         int[] pos = selected.position();
