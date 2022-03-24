@@ -36,8 +36,6 @@ class Board{
         populate(Cells, "Y_cell",2);
         populate(Cells, "Z_cell",3);
         populate(Virus,"Virus",3);
-
-        show();
     }
 
     public void populate(Vector<Agent> team, String type, int amount){

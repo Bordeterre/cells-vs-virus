@@ -16,23 +16,23 @@ public class Main{
             return null;
         }
     }
-
-    public static int saisie_entier (){
-        try{
-            BufferedReader buff = new BufferedReader
-                (new InputStreamReader(System.in));
-            String chaine=buff.readLine();
-            int num = Integer.parseInt(chaine);
-            return num;
-        }
-        catch(IOException e){return 0;}
-    }
     
     //Initialisation
-    public static Player player_choice(Boolean cell_team){
-        String choice = "";
+    public static int difficulty_choice(){
         while(true){
-            choice = saisie_chaine();
+            System.out.println("Quelle substance voulez vous injecter aux cellules ? Tapez 1 pour un immuno-supresseur, 2 pour un placebo, et 2 pour un vaccin");
+            String choice = saisie_chaine();
+            switch(choice){
+                case "1" : return 1;
+                case "2" : return 2;
+                case "3" : return 3;
+                default : System.out.println ("Tapez 1 pour un immuno-supresseur, 2 pour un placebo, et 2 pour un vaccin");
+            }
+        }
+    }
+    public static Player player_choice(Boolean cell_team){
+        while(true){
+            String choice = saisie_chaine();
             switch(choice){
                 case "h" : return new Human_player(cell_team);
                 case "r" : return new Robot_player(cell_team);
@@ -65,12 +65,14 @@ public class Main{
 
     //Main
     public static void main(String[] args){
-        Board board = new Board(3,1);
+        int difficulty = difficulty_choice();
+        Board board = new Board(5,1);
         System.out.println("Player one, Virus ! Tapez h pour un joueur humain, ou r pour un joueur robot");
         Player virus_player = player_choice(false);
         System.out.println("Player two, Cells ! Tapez h pour un joueur humain, ou r pour un joueur robot");
         Player cells_player = player_choice(true);
 
+        board.show();
         boolean playing = true;
         while(playing){
             playing = turn(board,virus_player,cells_player);

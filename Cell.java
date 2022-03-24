@@ -43,8 +43,12 @@ class Cell extends Agent {
 
     public boolean initial_infection(Virus virus){
         if (immune){
-            System.out.println("La cellule est immunisée au virus ! ");
+            System.out.println("La cellule a étée affaiblie par le virus ! ");
             virus.death();
+            setIcon("(Y)");
+            immune = false;
+            infection_threshold=3;
+
             return false;
         } else if (infected) {
             System.out.println("La cellule est déja infectée par un virus !");
