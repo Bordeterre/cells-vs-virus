@@ -35,7 +35,7 @@ class Board{
         populate(Cells, "X_cell",1);
         populate(Cells, "Y_cell",1);
         populate(Cells, "Z_cell",1);
-        populate(Virus,"Virus",3);
+        populate(Virus,"Virus",5);
 
         show();
     }
@@ -81,12 +81,13 @@ class Board{
             Agent item = (Agent) e.next();
             int x = item.position()[0];
             int y = item.position()[1];
+            item.debug();
             if (x != -1){
                 //System.out.println(" " + x + " " + y + " " + size*(size-y-1) +x);
                 foreground[size*(size-y-1) +x] = item.display();
             }
             //System.out.println("x : "+ Integer.toString(x) + ", y :" + Integer.toString(y));
-            item.debug();
+            
         }
               
         for(Iterator e = Virus.iterator(); e.hasNext();){
@@ -181,26 +182,30 @@ class Board{
 
         if(cell1.get_immune()){
             cell1.death();
+            cell_interacting(cell2);
         } else if (cell2.get_immune()){
             cell2.death();
+            cell_interacting(cell1);
         } else if(cell1.get_infection_threshold() < cell2.get_infection_threshold()){
             cell2.cure();
             cell2.death();
+            cell_interacting(cell1);
         } else {
             cell1.cure();
             cell1.death();
+            cell_interacting(cell2);
         }
     }
 
     public void fight(Virus virus1, Virus virus2){
         if(virus1.get_turns()>virus2.get_turns()){
             virus2.death();
+            virus_interacting(virus1);
         } else {
             virus1.death();
+            virus_interacting(virus2);
         }
     }
-
-
 
     public void infection(Virus virus, Cell cell){
         if (cell.initial_infection(virus)){

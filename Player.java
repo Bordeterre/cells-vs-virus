@@ -94,7 +94,11 @@ abstract class Player{
             
             return false; 
         }
-
+        System.out.println("==========");
+        System.out.println("Direction : "+direction);
+        System.out.print("Selected : ");selected.debug();
+        System.out.println("==========");
+        /*
         if(!cells_team && board.full_collision_check(selected,board.Virus) != null){
             selected.move(opposite.get(direction));
             if (human_player){
@@ -102,6 +106,7 @@ abstract class Player{
             }
             return false;
         }
+        */
         return true;
     }
 
