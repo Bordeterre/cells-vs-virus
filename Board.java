@@ -33,9 +33,9 @@ class Board{
         Virus = new Vector<Agent>();
 
         populate(Cells, "X_cell",1);
-        populate(Cells, "Y_cell",1);
-        populate(Cells, "Z_cell",1);
-        populate(Virus,"Virus",5);
+        populate(Cells, "Y_cell",2);
+        populate(Cells, "Z_cell",3);
+        populate(Virus,"Virus",3);
 
         show();
     }
@@ -150,7 +150,7 @@ class Board{
         //Cells
         Cell C = (Cell) full_collision_check(A,Cells);
         if (C != null){
-            fusion(A,C);
+            cell_fusion(A,C);
         }
 
         //Virus  
@@ -173,12 +173,12 @@ class Board{
         //Virus  
         Virus V = (Virus) full_collision_check(A,Virus);
         if (V != null){
-            fight(A,V);
+            virus_fusion(A,V);
             
         }
     }
 
-    public void fusion(Cell cell1, Cell cell2){
+    public void cell_fusion(Cell cell1, Cell cell2){
 
         if(cell1.get_immune()){
             cell1.death();
@@ -197,14 +197,9 @@ class Board{
         }
     }
 
-    public void fight(Virus virus1, Virus virus2){
-        if(virus1.get_turns()>virus2.get_turns()){
-            virus2.death();
-            virus_interacting(virus1);
-        } else {
-            virus1.death();
-            virus_interacting(virus2);
-        }
+    public void virus_fusion(Virus virus1, Virus virus2){
+        virus1.set_turns(virus1.get_turns()+virus2.get_turns());
+        virus2.death();
     }
 
     public void infection(Virus virus, Cell cell){

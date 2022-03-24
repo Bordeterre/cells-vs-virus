@@ -34,6 +34,10 @@ class Virus extends Agent {
     public int get_turns(){
         return turns;
     }
+    public void set_turns(int turns){
+        this.turns = turns;
+    }
+
     // Interaction 
     public void infect(Cell host_cell){
         this.host_cell = host_cell;
@@ -48,14 +52,14 @@ class Virus extends Agent {
             }
         } else {
             turns +=1;
-            if(host_cell.ongoing_infection()){
-                host_cell = null;
-            }
-            if (turns >= 10){
-                turns = 4;
-                return position();
-            }
+            host_cell.ongoing_infection();
+
         }
+        if (turns >= 10){
+            turns = 4;
+            return position();
+        }
+
         int[] nosplit = {-1,-1};
         return nosplit;
     }

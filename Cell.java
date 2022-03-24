@@ -71,7 +71,7 @@ class Cell extends Agent {
         boolean legal_move = true_move(movement);
         if (legal_move && virus != null){
             infected = false;
-            virus.move(movement);
+            virus.true_move(movement);
         }
         return legal_move;
     }

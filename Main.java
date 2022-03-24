@@ -75,6 +75,5 @@ public class Main{
         while(playing){
             playing = turn(board,virus_player,cells_player);
         }
-        board.turn(virus_player);
     }
 }
