@@ -74,7 +74,6 @@ class Cell extends Agent {
     public boolean move(String movement){
         boolean legal_move = true_move(movement);
         if (legal_move && virus != null){
-            infected = false;
             virus.true_move(movement);
         }
         return legal_move;

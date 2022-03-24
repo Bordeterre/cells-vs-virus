@@ -32,10 +32,10 @@ class Board{
         Cells = new Vector<Agent>();
         Virus = new Vector<Agent>();
 
-        populate(Cells, "X_cell",1);
-        populate(Cells, "Y_cell",2);
-        populate(Cells, "Z_cell",3);
-        populate(Virus,"Virus",3);
+        populate(Cells, "X_cell",2*difficulty * size*size/25);
+        populate(Cells, "Y_cell",4 * size*size/25);
+        populate(Cells, "Z_cell",2*(4-difficulty) * size*size/25);
+        populate(Virus,"Virus",3 * size*size/25 );
     }
 
     public void populate(Vector<Agent> team, String type, int amount){
@@ -156,7 +156,7 @@ class Board{
         if (V != null){
             if(A.getVirus() == null){
                 infection(V,A);
-            } else {
+            } else if (A.getVirus() != V){
                 V.death();
             }
             

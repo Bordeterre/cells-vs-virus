@@ -14,16 +14,30 @@ class Human_player extends Player{
             return null;
         }
     }
+    
     public static int saisie_entier (){
-        try{
-            BufferedReader buff = new BufferedReader
-                (new InputStreamReader(System.in));
-            String chaine=buff.readLine();
-            int num = Integer.parseInt(chaine);
-            return num;
+        String chaine = saisie_chaine();
+        while(!isInteger(chaine)){
+            chaine = saisie_chaine();
         }
-        catch(IOException e){return 0;}
+        int num = Integer.parseInt(chaine);
+        return num;
+
     }
+
+    public static boolean isInteger( String input ) {
+        try {
+            Integer.parseInt( input );
+            return true;
+        }
+        catch( Exception e ) {
+            System.out.print("Veuillez entrer un chiffre entier ! ");
+            return false;
+        }
+    }
+
+
+
     // Création
     public Human_player(boolean cells_team){
         super(true,cells_team);
