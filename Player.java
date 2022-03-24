@@ -4,20 +4,21 @@ abstract class Player{
     private boolean human_player; //true pour human, false pour ordi
     private boolean cells_team; //true pour cells, false pour virus
     private String agent_name; //Nom utilisé dans les messages pour les agents
+    
     // Création
     public Player(boolean human_player, boolean cells_team){
         this.human_player = human_player;
         this.cells_team = cells_team;
-
+        
+        // détermine le nom des Agents du joueur
         if (cells_team){
-            agent_name = "cellule";
+            agent_name = "cellule";                         
         } else {
             agent_name = "virus";
         }
     }
 
     //publier paramètres
-
     public String get_name(){
         return agent_name;
     }
