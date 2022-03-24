@@ -51,7 +51,7 @@ class Human_player extends Player{
         int y =  saisie_entier() -1;
         return new int []{x,y};     
     }
-    //Entrer la direction du déplacement
+    //Entre la direction du déplacement
     public String move_choice(Agent selected){
         System.out.print("Veuillez entrer la direction du déplacement (z/q/s/d) : ");
         String direction = saisie_chaine();
