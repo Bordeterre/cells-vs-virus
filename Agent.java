@@ -12,11 +12,11 @@ abstract class Agent{
     
     // Création de l'agent et sa modification lorsqu'il bouge
     public Agent (int pos_x, int pos_y, String icon){
-        id = nb_agents;
-        nb_agents += 1;
-        x = pos_x;
-        y = pos_y;
-        this.icon = icon;
+        id = nb_agents;                                             //crée un nouvel Agent avec un nouvel identifiant
+        nb_agents += 1;                                             // Augmente de 1 le nombre d'Agent
+        x = pos_x;                                                  // défini sa position x
+        y = pos_y;                                                  //défini sa position y
+        this.icon = icon;                                           // défini l'icone
     }  
     // Change l'icone de l'Agent lorsqu'il est infecté ou guéri
     public void setIcon(String new_icon){
