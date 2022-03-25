@@ -206,7 +206,7 @@ class Board{
     }
 
     public void turn(Player virus_player){
-        Agent item2 = null;
+        Virus item2 = null;
         for(Iterator e = Virus.iterator(); e.hasNext();){
             Virus item = (Virus) e.next();
             int [] position = item.update();
@@ -220,6 +220,7 @@ class Board{
                     legal_movement = virus_player.move(item2,this);
                 }
                 Virus.add(item2);
+                virus_interacting(item2);
                 break;
             }
         }

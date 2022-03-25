@@ -47,9 +47,6 @@ class Virus extends Agent {
     public int[] update(){
         if(host_cell == null){
             turns -=1;
-            if (turns <= 0){
-                death();
-            }
         } else {
             turns +=1;
             host_cell.ongoing_infection();
@@ -58,6 +55,9 @@ class Virus extends Agent {
         if (turns >= 10){
             turns = 4;
             return position();
+        }
+        if (turns <= 0){
+            death();
         }
 
         int[] nosplit = {-1,-1};
