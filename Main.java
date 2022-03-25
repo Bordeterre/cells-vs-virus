@@ -9,6 +9,10 @@ public class Main{
             BufferedReader buff = new BufferedReader
                 (new InputStreamReader(System.in));
             String chaine=buff.readLine();
+            if(chaine.equals("stop")){
+                System.out.println("Vous avez abandoné la partie");
+                System.exit(0);
+            }
             return chaine;
         }
         catch(IOException e) {
