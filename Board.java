@@ -32,7 +32,7 @@ class Board{
         Cells = new Vector<Agent>();
         Virus = new Vector<Agent>();
 
-        populate(Cells, "X_cell",2*difficulty * size*size/25);
+        populate(Cells, "X_cell",2*(difficulty-1) * size*size/25);
         populate(Cells, "Y_cell",4 * size*size/25);
         populate(Cells, "Z_cell",2*(4-difficulty) * size*size/25);
         populate(Virus,"Virus",3 * size*size/25 );
