@@ -15,7 +15,7 @@ public int[] select_choice(Vector <Agent> Agents){
     while(!alive){
         int max = Agents.size();            // Défini le maximu pour le nombre aléatoire à la taille du vecteur Agent
         Random ran = new Random();
-        int nb = ran.nextInt(max);          // Donne un entier aléatoire entre 0 et max
+        int nb = ran.nextInt(max);          // Donne un entier aléatoire nb entre 0 et max
         Agent selected = Agents.get(nb);    // Sélectionne l'Agent à la position nb
         alive = selected.isAlive();         // Cherche si l'Agent est vivant
         pos = selected.position();          // Prend la position de l'Agent sélectionné
