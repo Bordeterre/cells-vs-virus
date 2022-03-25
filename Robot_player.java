@@ -28,10 +28,10 @@ public String move_choice(Agent selected){
     Random ran = new Random();
     int nb = ran.nextInt(4);                // Donne un entier aléatoire entre 0 et 3 inclus
     switch (nb){
-        case 0 : {return "z";}
-        case 1 : {return "s";}
-        case 2 : {return "d";}
-        case 3 : {return "q";}
+        case 0 : {return "z";}              // Si le nombre aléatoire est 0, l'Agent va vers le haut
+        case 1 : {return "s";}              // Si le nombre aléatoire est 1, l'Agent va vers le bas
+        case 2 : {return "d";}              // Si le nombre aléatoire est 2, l'Agent va vers la droite
+        case 3 : {return "q";}              // Si le nombre aléatoire est 3, l'Agent va vers la gauche
     }
     return "Error";                         // Retour par défaut
 }
