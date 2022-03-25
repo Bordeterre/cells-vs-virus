@@ -16,7 +16,7 @@ class Cell extends Agent {
         true_death();
     }
 
-    // Publier paramètres
+    // Publier paramètres de position et d'infection
     public void debug(){
         int x = position()[0];
         int y = position()[1];
@@ -40,6 +40,10 @@ class Cell extends Agent {
         return infection_threshold;
     }
 
+    // Infection des cellules par un virus
+    // Changement de la cellule Z en cellule Y après une infection et mort du virus
+    // Mort du virus si infection d'une cellule déjà infectée
+    // Infection si cellule Y ou X
     public boolean initial_infection(Virus virus){
         if (immune){
             System.out.println("La cellule a étée affaiblie par le virus ! ");
@@ -61,6 +65,7 @@ class Cell extends Agent {
         }
     }
 
+    // Temps d'infection des cellules Y
     public boolean ongoing_infection(){
         infection_time += 1;
         if (infection_time >= infection_threshold){
@@ -69,7 +74,10 @@ class Cell extends Agent {
         }
         return false;
     }
-
+    
+    // Mouvement de la cellule
+    // Vers une case vide
+    // Vers une case avec un virus
     public boolean move(String movement){
         boolean legal_move = true_move(movement);
         if (legal_move && virus != null){
