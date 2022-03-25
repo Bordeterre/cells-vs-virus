@@ -219,7 +219,7 @@ class Board{
             if (position[0] != -1){
                 int x = position[0];
                 int y = position[1];
-                item2 = new Virus(x,y,5);
+                item2 = new Virus(x,y,4);
                 boolean legal_movement = false;
                 
                 System.out.println("Votre virus s'est cloné ! Vers quelle direction voulez vous déplacer le nouveau né ?");
