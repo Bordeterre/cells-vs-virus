@@ -39,7 +39,9 @@ public class Main{
     }
 
 
-    //Initialisation
+    //Initialisation de la partie
+    // Choix du niveau de difficulté
+    // Choix de la taille du plateau
     public static int difficulty_choice(){
         while(true){
             System.out.println("Quelle substance voulez vous injecter aux cellules ? Tapez 1 pour un immuno-supresseur, 2 pour un placebo, et 3 pour un vaccin");
@@ -67,7 +69,7 @@ public class Main{
 
 
 
-
+    // Choix du type de joueur
     public static Player player_choice(Boolean cell_team){
         while(true){
             String choice = saisie_chaine();
