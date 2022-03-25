@@ -43,7 +43,7 @@ class Human_player extends Player{
         super(true,cells_team);
     }
     
-    //Choisir un agent en fcontion de sa position
+    //Choisir un agent en fonction de sa position
     public int[] select_choice(Vector <Agent> Agents){
         System.out.print("Veuillez sélectioner la position x de votre " + get_name() + " : ");
         int x =  saisie_entier() -1;
@@ -51,7 +51,7 @@ class Human_player extends Player{
         int y =  saisie_entier() -1;
         return new int []{x,y};     
     }
-    //Entre la direction du déplacement
+    //Entrer la direction du déplacement
     public String move_choice(Agent selected){
         System.out.print("Veuillez entrer la direction du déplacement (z/q/s/d) : ");
         String direction = saisie_chaine();
