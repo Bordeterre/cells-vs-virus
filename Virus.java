@@ -16,7 +16,7 @@ class Virus extends Agent {
         true_death();
     }
 
-    // Publier paramètres
+    // Publier paramètres de position et de tours restants
     public void debug(){
         int x = position()[0];
         int y = position()[1];
@@ -38,12 +38,15 @@ class Virus extends Agent {
         this.turns = turns;
     }
 
-    // Interaction 
+    // Affichage de l'icone "cellule infectée" de la cellule
     public void infect(Cell host_cell){
         this.host_cell = host_cell;
         setIcon("[" + host_cell.display().charAt(1) + "]");
     }
 
+    // Mettre à jour le nombre de tours
+    // Pour les cellules infectées
+    // Pour les virus
     public int[] update(){
         if(host_cell == null){
             turns -=1;
@@ -64,6 +67,7 @@ class Virus extends Agent {
         return nosplit;
     }
 
+    // Retourne le mouvement de la cellule suivant sa cellule hôte
     public boolean move(String movement){
         boolean legal_move = true_move(movement);
         if (legal_move && host_cell != null){
@@ -72,6 +76,7 @@ class Virus extends Agent {
         return legal_move;
     }
 
+    // Retourner l'icone initiale lorsque l'infection par un virus est terminée
     public void exit(){
         host_cell = null;
         setIcon(original_icon);
