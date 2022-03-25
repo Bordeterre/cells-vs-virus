@@ -14,7 +14,7 @@ class Board{
         }
         return false;
     }
-
+    // Vérifier si deux Agents sont sur la même case
     public Agent full_collision_check(Agent A, Vector <Agent> team){
         for(Iterator e = team.iterator(); e.hasNext();){
             Agent B = (Agent) e.next();
@@ -25,7 +25,9 @@ class Board{
         return null;
     }
 
-    // Initialisation
+    // Initialisation du plateau
+    // Création d'Agent Cells et Virus
+    // Vérification de collision et ajout dans le vecteur uniquement s'il n'y a pas de collision
     public Board(int size,int difficulty){
         this.size = size;
 
@@ -71,6 +73,7 @@ class Board{
         return size;
     }
 
+    // Affichage de la position des Agents
     public void show(){
         //Foreground
         String [] foreground = new String[size*size];
@@ -102,7 +105,7 @@ class Board{
 
         //Background
 
-
+        // Affichage du plateau
         String line = "───┼";
         for(int x = 0 ; x < size; x++){
             line += "───┼";
@@ -144,6 +147,9 @@ class Board{
 
     //Tour
 
+    // Interaction cellule-Agent
+    // Fusion des cellules
+    // Infection des cellules ou mort des virus suivant le type de cellule
     public void cell_interacting(Cell A){
         //Cells
         Cell C = (Cell) full_collision_check(A,Cells);
@@ -162,6 +168,9 @@ class Board{
         }
     }
 
+    // Interaction virus-Agent
+    // Infection si collision avec cellule
+    // Fusion si collision avec virus
     public void virus_interacting(Virus A){
         Cell C = (Cell) full_collision_check(A,Cells);
         if (C != null){
@@ -175,6 +184,7 @@ class Board{
         }
     }
 
+    // Fusion des cellules et garder immunité la plus faible
     public void cell_fusion(Cell cell1, Cell cell2){
 
         if(cell1.get_immune()){
@@ -194,17 +204,20 @@ class Board{
         }
     }
 
+    // Fusion des virus
     public void virus_fusion(Virus virus1, Virus virus2){
         virus1.set_turns(virus1.get_turns()+virus2.get_turns());
         virus2.death();
     }
 
+    // Infection cellule par virus
     public void infection(Virus virus, Cell cell){
         if (cell.initial_infection(virus)){
             virus.infect(cell);
         }
     }
 
+    // Division d'un virus
     public void turn(Player virus_player){
         Virus item2 = null;
         for(Iterator e = Virus.iterator(); e.hasNext();){
@@ -227,6 +240,7 @@ class Board{
         show();
     }
 
+    // Vérifier si une condition de victoire a été réalisée
     public void check_victory(){
         Virus.removeIf(e-> !e.isAlive());
         Cells.removeIf(e-> !e.isAlive());
