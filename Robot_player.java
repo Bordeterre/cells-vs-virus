@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 class Robot_player extends Player{
 
+    // Création
     public Robot_player(boolean cells_team){
         super(false,cells_team);
     }
