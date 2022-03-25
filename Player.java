@@ -10,7 +10,7 @@ abstract class Player{
         this.human_player = human_player;
         this.cells_team = cells_team;
         
-        // détermine le nom des Agents du joueur
+        // Déterminer le nom des Agents du joueur
         if (cells_team){
             agent_name = "cellule";                         
         } else {
@@ -18,12 +18,16 @@ abstract class Player{
         }
     }
 
-    //publier paramètres
+    //Publier paramètres
     public String get_name(){
         return agent_name;
     }
 
-    //Turn
+    //Tour de jeu du joueur
+    // Vérifier si une consition de victoire est remplie
+    // Demander l'Agent à sélectionner tant que la position ne contient pas d'Agent possible ou que le mouvement n'est pas possible
+    // Executer le mouvement possible
+    // Vérifier l'interaction Agent-Agent
     public void turn(Board board, int moves){
         for(int i = 0; i<moves; i++){
             board.check_victory();
@@ -46,6 +50,8 @@ abstract class Player{
         }
     }
 
+    // Déterminer le vecteur à utiliser par le joueur
+    // Retourner l'Agent ayant la même position que celle entrée par le joueur s'il existe
     public Agent select(Board board){
         Vector <Agent> Agents;
         if(cells_team){
@@ -69,7 +75,8 @@ abstract class Player{
 
     public abstract int[] select_choice(Vector <Agent> Agents); 
 
-
+    // Si le mouvement n'est pas possible (ex : en dehors du plateau), remettre l'Agent à sa place initiale 
+    // Redemander d'entrer un mouvement
     public boolean move(Agent selected,Board board){
         String direction = move_choice(selected);
         boolean legal = selected.move(direction);
@@ -99,15 +106,7 @@ abstract class Player{
         //System.out.println("Direction : "+direction);
         //System.out.print("Selected : ");selected.debug();
         //System.out.println("==========");
-        /*
-        if(!cells_team && board.full_collision_check(selected,board.Virus) != null){
-            selected.move(opposite.get(direction));
-            if (human_player){
-                System.out.println("Vous ne pouvez pas fusionner deux virus !");
-            }
-            return false;
-        }
-        */
+        // Décommenter ces lignes pour avoir des informations de débugage
         return true;
     }
 
