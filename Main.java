@@ -4,6 +4,7 @@ import java.lang.*;
 
 public class Main{
     // Utilitaires
+
     public static String saisie_chaine (){
         try {
             BufferedReader buff = new BufferedReader
@@ -44,8 +45,8 @@ public class Main{
 
 
     //Initialisation de la partie
+    
     // Choix du niveau de difficulté
-    // Choix de la taille du plateau
     public static int difficulty_choice(){
         while(true){
             System.out.println("Quelle substance voulez vous injecter aux cellules ? Tapez 1 pour un immuno-supresseur, 2 pour un placebo, et 3 pour un vaccin");
@@ -59,6 +60,7 @@ public class Main{
         }
     }
 
+    // Choix de la taille du plateau
     public static int size_choice(){
         System.out.println("Quelle taille de plateau voulez vous utiliser (5 recommendé pour une partie pas trop longue)");
         int choice = saisie_entier();

@@ -18,7 +18,7 @@ abstract class Player{
         }
     }
 
-    //Publier paramètres
+    // Renvoie le nom des agents controllés, utilisé pour les messages à l'utilisateur
     public String get_name(){
         return agent_name;
     }
@@ -103,11 +103,12 @@ abstract class Player{
             
             return false; 
         }
+        // Décommenter ces lignes pour avoir des informations de débugage
         //System.out.println("==========");
         //System.out.println("Direction : "+direction);
         //System.out.print("Selected : ");selected.debug();
         //System.out.println("==========");
-        // Décommenter ces lignes pour avoir des informations de débugage
+        
         return true;
     }
 

@@ -1,9 +1,10 @@
 class Cell extends Agent {
-    private boolean immune;
-    private boolean infected = false;
-    private int infection_time = 0;
-    private int infection_threshold;
-    private Virus virus = null;
+    private boolean immune; //True pour tuer un virus par simple contact
+    private boolean infected = false; //true si cellule infectée par un virus
+    private int infection_time = 0; //Nombre de tours consécutifs durant lesquels la cellule à été infectée
+    private int infection_threshold; // Nombre de tours d'infections requis pour tuer la cellule
+    private Virus virus = null; //Adresse d'un ventuel virus infectant la cellule
+    
     // Création
     public Cell(int pos_x, int pos_y,boolean immune, int infection_threshold, String icon){
         super(pos_x, pos_y,"("+icon+")");
@@ -11,6 +12,7 @@ class Cell extends Agent {
         this.infection_threshold = infection_threshold; 
     }
 
+    // Soin avant la vrai mort, pour faire sortir le virus. 
     public void death (){
         cure();
         true_death();
@@ -31,7 +33,7 @@ class Cell extends Agent {
     public Virus getVirus(){
         return virus;
     }
-    // Interaction
+
     public boolean get_immune(){
         return immune;
     }
@@ -65,7 +67,7 @@ class Cell extends Agent {
         }
     }
 
-    // Temps d'infection des cellules Y
+    // Gestion de l'infection en fin de tour
     public boolean ongoing_infection(){
         infection_time += 1;
         if (infection_time >= infection_threshold){
@@ -76,8 +78,6 @@ class Cell extends Agent {
     }
     
     // Mouvement de la cellule
-    // Vers une case vide
-    // Vers une case avec un virus
     public boolean move(String movement){
         boolean legal_move = true_move(movement);
         if (legal_move && virus != null){
@@ -86,6 +86,7 @@ class Cell extends Agent {
         return legal_move;
     }
 
+    //Séparation de la cellule et du virus
     public void cure(){
         if(virus != null){
             virus.exit();

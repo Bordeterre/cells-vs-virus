@@ -3,18 +3,18 @@ import java.util.*;
 import java.lang.*;
 
 class Board{
-    private int size;
-    public Vector <Agent> Cells;
-    public Vector <Agent> Virus;
+    private int size; //Longueur d'un coté du plateau (en cases)
+    public Vector <Agent> Cells; // Regroupe les cellules X, Y et Z
+    public Vector <Agent> Virus; //Regroupe les virus
 
-    // Utilitaires
+    // Vérifie si deux agents sont en collsion
     public boolean collision_check(Agent A, Agent B){
         if (Arrays.equals(A.position(),B.position())){
             return true;
         }
         return false;
     }
-    // Vérifier si deux Agents sont sur la même case
+    // Renvoie l'éventuel agent B du vecteur team ayant rentré en collision avec l'agent A
     public Agent full_collision_check(Agent A, Vector <Agent> team){
         for(Iterator e = team.iterator(); e.hasNext();){
             Agent B = (Agent) e.next();
@@ -27,7 +27,7 @@ class Board{
 
     // Initialisation du plateau
     // Création d'Agent Cells et Virus
-    // Vérification de collision et ajout dans le vecteur uniquement s'il n'y a pas de collision
+    //appel de populate()
     public Board(int size,int difficulty){
         this.size = size;
 
@@ -40,6 +40,7 @@ class Board{
         populate(Virus,"Virus",3 * size*size/25 );
     }
 
+    // Remplissage du vecteur team avec "amount" agent "type", en évitant les collisions. 
     public void populate(Vector<Agent> team, String type, int amount){
         amount += team.size();
 
@@ -68,12 +69,11 @@ class Board{
         }
     }
 
-    //Publication
     public int getSize(){
         return size;
     }
 
-    // Affichage de la position des Agents
+    // Affichage de du plateau et des agents
     public void show(){
         //Foreground
         String [] foreground = new String[size*size];
@@ -84,28 +84,21 @@ class Board{
             int y = item.position()[1];
             //item.debug();
             if (x != -1){
-                //System.out.println(" " + x + " " + y + " " + size*(size-y-1) +x);
                 foreground[size*(size-y-1) +x] = item.display();
-            }
-            //System.out.println("x : "+ Integer.toString(x) + ", y :" + Integer.toString(y));
-            
+            }  
         }
               
         for(Iterator e = Virus.iterator(); e.hasNext();){
             Agent item = (Agent) e.next();
             int x = item.position()[0];
             int y = item.position()[1];
-            //if (x != -1 && size*(size-y-1) + x >= 0 && size*(size-y-1) +x < foreground.length){
+            //item.debug();
             if (x != -1){
                 foreground[size*(size-y-1) +x] = item.display();
             }
-            //item.debug();
-            }
-
+        }
 
         //Background
-
-        // Affichage du plateau
         String line = "───┼";
         for(int x = 0 ; x < size; x++){
             line += "───┼";
@@ -145,7 +138,7 @@ class Board{
         System.out.println(line);
     }
 
-    //Tour
+  
 
     // Interaction cellule-Agent
     // Fusion des cellules
@@ -210,7 +203,7 @@ class Board{
         virus2.death();
     }
 
-    // Infection cellule par virus
+    // Tentative d'infection cellule par virus
     public void infection(Virus virus, Cell cell){
         if (cell.initial_infection(virus)){
             virus.infect(cell);
@@ -228,7 +221,9 @@ class Board{
                 int y = position[1];
                 item2 = new Virus(x,y,5);
                 boolean legal_movement = false;
+                
                 System.out.println("Votre virus s'est cloné ! Vers quelle direction voulez vous déplacer le nouveau né ?");
+                item.debug();
                 while (!legal_movement){
                     legal_movement = virus_player.move(item2,this);
                 }

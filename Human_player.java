@@ -1,7 +1,9 @@
 import java.io.*;
 import java.util.*;
 class Human_player extends Player{
+    
     // Utilitaires
+
     public static String saisie_chaine (){
         try {
             BufferedReader buff = new BufferedReader

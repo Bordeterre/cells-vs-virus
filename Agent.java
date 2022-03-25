@@ -2,10 +2,10 @@
 import java.io.*;
 import java.util.*;
 abstract class Agent{
-    private boolean alive = true;
-    private int x;
-    private int y;
-    private String icon;
+    private boolean alive = true; //Détermine le status de l'agent
+    private int x; //Position x
+    private int y; //Position y
+    private String icon; //Icon affichée
     
     // Création de l'agent
     public Agent (int pos_x, int pos_y, String icon){ 

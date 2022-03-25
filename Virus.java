@@ -1,7 +1,7 @@
 class Virus extends Agent {
-    private Cell host_cell = null;
-    private int turns;
-    private String original_icon;
+    private Cell host_cell = null; //Adress de l'éventuelle cellule que le virus infecte. 
+    private int turns; // Nombre de tours de vie du virus
+    private String original_icon; //Icone originelle du virus (l'icone change lorsque le virus infecte une cellule)
     // Création
     public Virus(int pos_x, int pos_y, int turns){
         super(pos_x, pos_y, " v ");
@@ -9,6 +9,7 @@ class Virus extends Agent {
         this.turns = turns;
     }
 
+    //Mort
     public void death (){
         if(host_cell != null){
             host_cell.cure();
@@ -38,15 +39,13 @@ class Virus extends Agent {
         this.turns = turns;
     }
 
-    // Affichage de l'icone "cellule infectée" de la cellule
+    // Infecte la cellule "host_cell", appelé par Board.infection
     public void infect(Cell host_cell){
         this.host_cell = host_cell;
         setIcon("[" + host_cell.display().charAt(1) + "]");
     }
 
-    // Mettre à jour le nombre de tours
-    // Pour les cellules infectées
-    // Pour les virus
+    // Met à jour le nombre de tours restant du virus (et met à jour une éventuelle celluel hôte), et tue ou divise éventuellement le virs
     public int[] update(){
         if(host_cell == null){
             turns -=1;
@@ -67,7 +66,7 @@ class Virus extends Agent {
         return nosplit;
     }
 
-    // Retourne le mouvement de la cellule suivant sa cellule hôte
+    // Déplace le virus. Renvoie true si le déplacement est valide, false sinon. Soigne éventuellement une cellule hôte
     public boolean move(String movement){
         boolean legal_move = true_move(movement);
         if (legal_move && host_cell != null){
@@ -76,7 +75,7 @@ class Virus extends Agent {
         return legal_move;
     }
 
-    // Retourner l'icone initiale lorsque l'infection par un virus est terminée
+    // Permet de sortir le virus de sa cellule hôte. Appelé par Cell.cure()
     public void exit(){
         host_cell = null;
         setIcon(original_icon);
