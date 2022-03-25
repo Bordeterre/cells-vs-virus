@@ -21,8 +21,8 @@ class Virus extends Agent {
         int x = position()[0];
         int y = position()[1];
         String tmp = display();
-        tmp += "[ " + (x+1) + ", " + (y+1) + "] ; ";
-        tmp += "turns :" + turns;
+        tmp += "[ " + (x+1) + ", " + (y+1) + "] ";
+        tmp += "("+turns +" turns remaining)";
         if (host_cell != null){
             tmp += " "+host_cell.display();
         }

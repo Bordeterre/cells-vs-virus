@@ -79,7 +79,7 @@ class Board{
             Agent item = (Agent) e.next();
             int x = item.position()[0];
             int y = item.position()[1];
-            item.debug();
+            //item.debug();
             if (x != -1){
                 //System.out.println(" " + x + " " + y + " " + size*(size-y-1) +x);
                 foreground[size*(size-y-1) +x] = item.display();
@@ -96,7 +96,7 @@ class Board{
             if (x != -1){
                 foreground[size*(size-y-1) +x] = item.display();
             }
-            item.debug();
+            //item.debug();
             }
 
 

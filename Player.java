@@ -31,6 +31,7 @@ abstract class Player{
             boolean legal_movement = false;
             while (selected == null || !legal_movement){
                 selected = select(board);
+                selected.debug();
                 if(selected != null){
                     legal_movement=move(selected,board);
                 }
@@ -94,10 +95,10 @@ abstract class Player{
             
             return false; 
         }
-        System.out.println("==========");
-        System.out.println("Direction : "+direction);
-        System.out.print("Selected : ");selected.debug();
-        System.out.println("==========");
+        //System.out.println("==========");
+        //System.out.println("Direction : "+direction);
+        //System.out.print("Selected : ");selected.debug();
+        //System.out.println("==========");
         /*
         if(!cells_team && board.full_collision_check(selected,board.Virus) != null){
             selected.move(opposite.get(direction));
