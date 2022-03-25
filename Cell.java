@@ -25,7 +25,7 @@ class Cell extends Agent {
         String tmp = display();
         tmp += "[ " + (x+1) + ", " + (y+1) + "]";
         if(infected){
-            tmp += "infected (" + (infection_threshold-infection_time) + " turns remaining)";
+            tmp += "Infectée (Il reste " + (infection_threshold-infection_time) + " tours)";
         }
         System.out.println(tmp);
     }
