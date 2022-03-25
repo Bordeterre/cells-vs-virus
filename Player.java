@@ -33,6 +33,7 @@ abstract class Player{
             board.check_victory();
             Agent selected = null;
             boolean legal_movement = false;
+            System.out.println("Mouvement " + (i+1) +"/" + moves +" : ");
             while (selected == null || !legal_movement){
                 selected = select(board);
                 selected.debug();
